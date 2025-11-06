@@ -1,29 +1,32 @@
-import threading
+import multiprocessing
+
 import time
 
 
-def print_numbers():
+def square_numbers():
     for i in range(5):
-        time.sleep(2)
-        print(f"Number: {i}")
+        time.sleep(1)
+        print(f"Hey this is the square. Square is {i * i}")
 
 
-def print_letters():
-    for letter in "ABCD":
-        time.sleep(2)
-        print(f"Letter: {letter}")
+def cube_numbers():
+    for i in range(5):
+        time.sleep(1.5)
+        print(f"Hey this is the cube. Cube is {i * i * i}")
 
 
-t1 = threading.Thread(target=print_numbers)
-t2 = threading.Thread(target=print_letters)
+if __name__ == "__main__":
 
-start_time = time.time()
+    t1 = time.time()
 
-t1.start()
-t2.start()
+    p1 = multiprocessing.Process(target=square_numbers)
+    p2 = multiprocessing.Process(target=cube_numbers)
 
-t1.join()
-t2.join()
+    p1.start()
+    p2.start()
 
-finished_time = time.time() - start_time
-print(f"Time taken: {finished_time} seconds")  
+    p1.join()
+    p2.join()
+
+    t2 = time.time()
+    print(f"Total time taken: {t2 - t1}")

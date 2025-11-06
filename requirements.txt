@@ -1,2 +1,4 @@
 scikit-learn
 panda
+bs4
+flask
